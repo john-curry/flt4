@@ -1,0 +1,34 @@
+send to server : start round
+server responds: round started
+send to server : all actions for turn picked
+server responds: acknoledge
+
+send to server : action plans
+server responds: health updates and/or isgamedone
+
+
+packet: rndstrt <name of all members in team and their class>
+{ "method" : "rndstrt" , [ <name> , <name> , <name> ] }
+
+packet: rndack  <name of all members in team and their class>
+{ "method" : "rndstrt" , [ <name> , <name> , <name> ] }
+
+packet: turnend <list of actions to be taken>
+{ "method" : "turnend" , "actions" : [ 
+  { "target"   : <target>, "damage" : <damage> },
+  { "target"   : <target>, "damage" : <damage> },
+  { "target"   : <target>, "damage" : <damage> },
+  { "target"   : <all>   , "damage" : <damage> } 
+  ] 
+}
+packet: turnack <list of actions to be taken>
+{ "method" : "turnend" , "actions" :[ { <target> : <damage> } , { <target> : <damage> } , { <all> : <damage> } ] }
+
+
+packet: rndstatus <gameover|gamecontinue>
+{ "round_status" : <gameover|gamecontinue> }
+    
+actions: 
+  
+  one target  +/- health <name> : <signed int>
+  all targets +/- health <    > : <signed int>
